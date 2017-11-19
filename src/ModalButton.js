@@ -12,6 +12,10 @@ class ModalButton extends Component {
 
   static displayName = 'Modal';
 
+  componentDidMount = () => {
+    this.modalDomNode = document.querySelector('#portal');
+  }
+
   showModal = () => {
     this.setState({
       isModalShow: true
@@ -29,9 +33,15 @@ class ModalButton extends Component {
 
     return (
       <div>
-        <button className="App__button" type="button" onClick={this.showModal}>Show modal!</button>
+        <button 
+          className="App__button" 
+          type="button" 
+          onClick={this.showModal}
+        >
+          Show modal!
+        </button>
         {isModalShow ? (
-          <Modal domNode={document.querySelector('#portal')}>
+          <Modal domNode={this.modalDomNode}>
             <div className="Modal">
               <div className="Modal__overlay">
                 <div className="Modal__dialog">
@@ -42,7 +52,13 @@ class ModalButton extends Component {
                     <p className="Modal__text">Lorem ipsum dolor sit amet...</p>
                   </div>
                   <footer className="Modal__footer">
-                    <button className="App__button" type="button" onClick={this.hideModal}>Hide modal!</button>
+                    <button 
+                      className="App__button" 
+                      type="button" 
+                      onClick={this.hideModal}
+                    >
+                      Hide modal!
+                    </button>
                   </footer>
                 </div>
               </div>

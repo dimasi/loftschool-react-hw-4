@@ -11,7 +11,7 @@ class CardNumberInput extends Component {
 
   componentWillReceiveProps = nextProps => {
     this.setState({
-      number: this.format(nextProps.cardNumber)
+      number: this.format(nextProps.cardNumber).trim()
     });
   }
 
@@ -22,9 +22,21 @@ class CardNumberInput extends Component {
     onChange(this.normalize(number));
   }
 
-  format = str => str ? str.toString().replace(/(.{4})/g, '$1 ') : '';
+  format = str => {
+    if (str) { 
+      return str.toString().replace(/(.{4})/g, '$1 ');
+    } else {
+      return '';
+    }
+  }
 
-  normalize = str => str ? str.replace(/\s/g, '') : '';
+  normalize = str => {
+    if (str) { 
+      return str.replace(/\s/g, '');
+    } else {
+      return '';
+    }
+  }
 
   render() {
     const {number} = this.state;
@@ -35,7 +47,7 @@ class CardNumberInput extends Component {
               className="App__textfield"
               placeholder="0000-0000-0000-0000"
               name="cardNumber"
-              value={number.trim()}
+              value={number}
               onChange={this.handleChange}
           />
         </div>
